@@ -18,6 +18,9 @@ import { Route as FaqRouteImport } from './routes/faq'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as TrackOrderRouteImport } from './routes/track-order'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminCatalogRouteImport } from './routes/admin.catalog'
+import { Route as AdminLibraryRouteImport } from './routes/admin.library'
+import { Route as AdminMaterialsRouteImport } from './routes/admin.materials'
 import { Route as AdminOrdersRouteImport } from './routes/admin.orders'
 import { Route as OrderOrderIdRouteImport } from './routes/order.$orderId'
 import { Route as ShopIndexRouteImport } from './routes/shop.index'
@@ -69,6 +72,21 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminCatalogRoute = AdminCatalogRouteImport.update({
+  id: '/catalog',
+  path: '/catalog',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminLibraryRoute = AdminLibraryRouteImport.update({
+  id: '/library',
+  path: '/library',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminMaterialsRoute = AdminMaterialsRouteImport.update({
+  id: '/materials',
+  path: '/materials',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminOrdersRoute = AdminOrdersRouteImport.update({
   id: '/orders',
   path: '/orders',
@@ -104,6 +122,9 @@ export interface FileRoutesByFullPath {
   '/faq': typeof FaqRoute
   '/how-it-works': typeof HowItWorksRoute
   '/track-order': typeof TrackOrderRoute
+  '/admin/catalog': typeof AdminCatalogRoute
+  '/admin/library': typeof AdminLibraryRoute
+  '/admin/materials': typeof AdminMaterialsRoute
   '/admin/orders': typeof AdminOrdersRouteWithChildren
   '/order/$orderId': typeof OrderOrderIdRoute
   '/shop/$slug': typeof ShopSlugRoute
@@ -119,6 +140,9 @@ export interface FileRoutesByTo {
   '/faq': typeof FaqRoute
   '/how-it-works': typeof HowItWorksRoute
   '/track-order': typeof TrackOrderRoute
+  '/admin/catalog': typeof AdminCatalogRoute
+  '/admin/library': typeof AdminLibraryRoute
+  '/admin/materials': typeof AdminMaterialsRoute
   '/admin/orders': typeof AdminOrdersRouteWithChildren
   '/order/$orderId': typeof OrderOrderIdRoute
   '/shop/$slug': typeof ShopSlugRoute
@@ -136,6 +160,9 @@ export interface FileRoutesById {
   '/faq': typeof FaqRoute
   '/how-it-works': typeof HowItWorksRoute
   '/track-order': typeof TrackOrderRoute
+  '/admin/catalog': typeof AdminCatalogRoute
+  '/admin/library': typeof AdminLibraryRoute
+  '/admin/materials': typeof AdminMaterialsRoute
   '/admin/orders': typeof AdminOrdersRouteWithChildren
   '/order/$orderId': typeof OrderOrderIdRoute
   '/shop/$slug': typeof ShopSlugRoute
@@ -154,6 +181,9 @@ export interface FileRouteTypes {
     | '/faq'
     | '/how-it-works'
     | '/track-order'
+    | '/admin/catalog'
+    | '/admin/library'
+    | '/admin/materials'
     | '/admin/orders'
     | '/order/$orderId'
     | '/shop/$slug'
@@ -169,6 +199,9 @@ export interface FileRouteTypes {
     | '/faq'
     | '/how-it-works'
     | '/track-order'
+    | '/admin/catalog'
+    | '/admin/library'
+    | '/admin/materials'
     | '/admin/orders'
     | '/order/$orderId'
     | '/shop/$slug'
@@ -185,6 +218,9 @@ export interface FileRouteTypes {
     | '/faq'
     | '/how-it-works'
     | '/track-order'
+    | '/admin/catalog'
+    | '/admin/library'
+    | '/admin/materials'
     | '/admin/orders'
     | '/order/$orderId'
     | '/shop/$slug'
@@ -272,6 +308,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/catalog': {
+      id: '/admin/catalog'
+      path: '/catalog'
+      fullPath: '/admin/catalog'
+      preLoaderRoute: typeof AdminCatalogRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/library': {
+      id: '/admin/library'
+      path: '/library'
+      fullPath: '/admin/library'
+      preLoaderRoute: typeof AdminLibraryRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/materials': {
+      id: '/admin/materials'
+      path: '/materials'
+      fullPath: '/admin/materials'
+      preLoaderRoute: typeof AdminMaterialsRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/orders': {
       id: '/admin/orders'
       path: '/orders'
@@ -323,11 +380,17 @@ const AdminOrdersRouteWithChildren = AdminOrdersRoute._addFileChildren(
 )
 
 interface AdminRouteChildren {
+  AdminCatalogRoute: typeof AdminCatalogRoute
+  AdminLibraryRoute: typeof AdminLibraryRoute
+  AdminMaterialsRoute: typeof AdminMaterialsRoute
   AdminOrdersRoute: typeof AdminOrdersRouteWithChildren
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminCatalogRoute: AdminCatalogRoute,
+  AdminLibraryRoute: AdminLibraryRoute,
+  AdminMaterialsRoute: AdminMaterialsRoute,
   AdminOrdersRoute: AdminOrdersRouteWithChildren,
   AdminIndexRoute: AdminIndexRoute,
 }
