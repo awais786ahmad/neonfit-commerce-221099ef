@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useSyncExternalStore, useState } from "react";
 import { toast } from "sonner";
 import { Copy, Package, Pencil, Plus, Shapes, Trash2 } from "lucide-react";
 
@@ -32,12 +32,12 @@ import { NeonCanvas } from "@/components/NeonCanvas";
 import { PageFade } from "@/components/Reveal";
 import {
   adminTemplateStore,
+  builtinDisabledStore,
   setBuiltinTemplateEnabled,
-  uid,
   useAdminTemplates,
   type AdminTemplateEntry,
 } from "@/lib/admin";
-import { cloneDesign, makeTextElement } from "@/lib/neon/catalog";
+import { cloneDesign, makeTextElement, uid } from "@/lib/neon/catalog";
 import { allBuiltinTemplates, TEMPLATE_CATEGORIES, type Template } from "@/lib/neon/templates";
 import type { NeonDesign } from "@/lib/neon/types";
 
@@ -336,9 +336,6 @@ function AdminCatalog() {
     </PageFade>
   );
 }
-
-import { builtinDisabledStore } from "@/lib/admin";
-import { useSyncExternalStore } from "react";
 
 function useDisabledBuiltins(): string[] {
   return useSyncExternalStore(builtinDisabledStore.subscribe, builtinDisabledStore.read, () => []);

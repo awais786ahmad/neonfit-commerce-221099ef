@@ -166,6 +166,13 @@ function buildTemplates(): Template[] {
 let cached: Template[] | null = null;
 
 /** Built-in templates, minus any the admin has disabled. */
+/** Full built-in template list (including admin-disabled ones), for the admin panel. */
+export function allBuiltinTemplates(): Template[] {
+  if (!cached) cached = buildTemplates();
+  return cached;
+}
+
+/** Built-in templates, minus any the admin has disabled. */
 function builtinTemplates(): Template[] {
   if (!cached) cached = buildTemplates();
   const disabled = builtinDisabledStore.read();
